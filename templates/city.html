@@ -1,0 +1,535 @@
+<!--
+=========================================================
+Material Dashboard - v2.1.2
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-dashboard
+Copyright 2020 Creative Tim (https://www.creative-tim.com)
+Coded by Creative Tim
+
+=========================================================
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../static/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../static/assets/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>
+    Sentimental Analysis
+  </title>
+  <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <!-- CSS Files -->
+  <link href="../static/assets/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <!-- CSS Just for demo purpose, don't include it in your project -->
+  <link href="../static/assets/demo/demo.css" rel="stylesheet" />
+  <style>
+    .card-header-success .svg{
+      width: 240pt;
+    }
+  </style>
+</head>
+
+<body class="">
+  <div class="wrapper ">
+    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
+      <!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+      <div class="logo"><a href="#" class="simple-text logo-normal">
+          Sentiment Analysis
+        </a></div>
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item ">
+            <a class="nav-link" href="/index">
+              <i class="material-icons">Home</i>
+              <p>Home</p>
+            </a>
+          </li>
+          <li class="nav-item   ">
+            <a class="nav-link" href="/dashboard">
+              <i class="material-icons">dashboard</i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/user">
+              <i class="material-icons">library_books</i>
+              <p>Review Based on State</p>
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/city_user">
+              <i class="material-icons">library_books</i>
+              <p>Review Based on city</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+              <a class="nav-link" href="/download">
+                <i class="material-icons">Download</i>
+                <p>Download</p>
+              </a>
+          </li>
+
+          <li class="nav-item ">
+            <a class="nav-link" href="/table">
+              <i class="material-icons">content_paste</i>
+              <p>Table List</p>
+            </a>
+          </li>
+
+
+        </ul>
+      </div>
+    </div>
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">States</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form "action="{{ url_for('city_based')}}"method="post">
+              <div class="input-group no-border">
+                <input type="text" name="city_place" value="" class="form-control" placeholder="Search city...">
+                <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                  <i class="material-icons">search</i>
+                  <div class="ripple-container"></div>
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </nav>
+
+      <!-- End Navbar -->
+      <div class="content">
+        <h3>Review For {{city}} </h3>
+        <div class="container-fluid">
+          <div class="row">
+
+            <div class="col-lg-4 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">store</i>
+                  </div>
+                  <p class="card-category" style="color: black;font-weight: bold">Positive Feedback</p>
+                  <h3 class="card-title">{{Positive_city}}</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats" style="color: black;font-weight: bold"  >Positive Percentage Feedback
+                   {{pos_per}} <span>%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+             <div class="col-lg-4 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">content_copy</i>
+                  </div>
+                  <p class="card-category" style="color: black;font-weight: bold">Neutral Feedback</p>
+                  <h3 class="card-title">{{Neutral_City}}
+
+                  </h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats" style="color: black;font-weight: bold" >Neutral Percentage Feedback
+
+                    {{neu_per}}<span>%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">info_outline</i>
+                  </div>
+                  <p class="card-category" style="color: black;font-weight: bold">Negative Feedback</p>
+                  <h3 class="card-title">{{Negative_city}}</h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats" style="color: black;font-weight: bold" > Negative Percentage Feedback
+                    {{neg_per}} <span>%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <h3>statistics</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card card-chart">
+                <div class="card-header "style="background-color:#fff9f9">
+
+                   <canvas id="_pieChart" style="text-decoration-color: whitesmoke;font-weight: bold;font-size: 10px" ></canvas>
+
+                </div>
+
+
+                <div class="card-body">
+                  <h4 class="card-title" style="text-decoration-color: black;font-weight: bold" >Review Graph</h4>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card card-chart">
+                <div class="card-header">
+                   <!--canvas id="mypieChart2" style="text-decoration-color: whitesmoke;font-weight: bold;font-size: 10px" ></canvas-->
+                  <!--canvas id="mypieChart2" ></canvas-->
+                  <canvas id="mypieChart2" height="100" width="100" ></canvas>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title" style="text-decoration-color: black;font-weight: bold" >Review Distributions</h4>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card card-chart">
+                <div class="card-header "style="background-color:#fff9f9">
+
+                   <canvas id="barchart2" style="text-decoration-color: whitesmoke;font-weight: bold;font-size: 10px" ></canvas>
+
+                </div>
+
+
+                <div class="card-body">
+                  <h4 class="card-title" style="text-decoration-color: black;font-weight: bold" >Positive Keywords</h4>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="card card-chart">
+                <div class="card-header">
+
+                  <canvas id="barchart3"  ></canvas>
+                </div>
+                <div class="card-body">
+                  <h4 class="card-title" style="text-decoration-color: black;font-weight: bold">Negative Keywords</h4>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-6 col-md-12">
+              <div class="card">
+                <div class="card-header card-header-tabs card-header-primary" style="background-color: #2196f3">
+                  <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                      <h4 class="card-title">Negative Word Analyser</h4>
+                      <p class="card-category">Word Analyse</p>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="tab-content">
+                    {{image2|safe}}
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="card">
+                <div class="card-header card-header-warning">
+                  <h4 class="card-title">Positive Word Analysis </h4>
+                  <p class="card-category">Word Analysis</p>
+                </div>
+
+                <div class="card-body">
+                  <div class="tab-content">
+                    {{image1|safe}}
+
+                  </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!--   Core JS Files   -->
+  <script src="../static/assets/js/core/jquery.min.js"></script>
+  <script src="../static/assets/js/core/popper.min.js"></script>
+  <script src="../static/assets/js/core/bootstrap-material-design.min.js"></script>
+  <script src="../static/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!-- Plugin for the momentJs  -->
+  <script src="../static/assets/js/plugins/moment.min.js"></script>
+  <!--  Plugin for Sweet Alert -->
+  <script src="../static/assets/js/plugins/sweetalert2.js"></script>
+  <!-- Forms Validations Plugin -->
+  <script src="../static/assets/js/plugins/jquery.validate.min.js"></script>
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <script src="../static/assets/js/plugins/jquery.bootstrap-wizard.js"></script>
+  <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <script src="../static/assets/js/plugins/bootstrap-selectpicker.js"></script>
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <script src="../static/assets/js/plugins/bootstrap-datetimepicker.min.js"></script>
+  <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
+  <script src="../static/assets/js/plugins/jquery.dataTables.min.js"></script>
+  <!--	Plugin for Tags, full documentation here: https://github.com/bootstrap-tagsinput/bootstrap-tagsinputs  -->
+  <script src="../static/assets/js/plugins/bootstrap-tagsinput.js"></script>
+  <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
+  <script src="../static/assets/js/plugins/jasny-bootstrap.min.js"></script>
+  <!--  Full Calendar Plugin, full documentation here: https://github.com/fullcalendar/fullcalendar    -->
+  <script src="../static/assets/js/plugins/fullcalendar.min.js"></script>
+  <!-- Vector Map plugin, full documentation here: http://jvectormap.com/documentation/ -->
+  <script src="../static/assets/js/plugins/jquery-jvectormap.js"></script>
+  <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+  <script src="../static/assets/js/plugins/nouislider.min.js"></script>
+  <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+  <!-- Library for adding dinamically elements -->
+  <script src="../static/assets/js/plugins/arrive.min.js"></script>
+    <!-- Chartist JS -->
+  <script src="../static/assets/js/plugins/chartist.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="../static/assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../static/assets/js/material-dashboard.js?v=2.1.2" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
+
+<script>
+     const data1 = [{{pos_per}}, {{neg_per}},{{neu_per}}]
+      const data = {
+    labels: ['Positive', 'Negative', 'Neutral'],
+    datasets: [
+      {
+        data: data1,
+        backgroundColor: [
+          'rgb(218,171,10)',
+          'rgb(204,25,76)',
+          'rgb(42,104,210)',
+        ],
+           borderColor: [
+          'rgb(218,171,10)',
+          'rgb(204,25,76)',
+          'rgb(42,104,210)',
+        ],
+      }
+    ]
+  };
+      const config = {
+  type: 'pie',
+  data: data,
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: false,
+        text: 'Review vs Rating'
+      }
+    }
+  },
+};
+      let mypieChart = document.getElementById('_pieChart').getContext('2d');
+      new Chart(mypieChart, config);
+const labels2 = ['1', '2', '3', '4', '5'];
+      const data2 = {
+    labels: labels2,
+    datasets: [
+      {
+        label: 'Positive',
+        data: {{star_pos}},
+        backgroundColor: [
+          'rgb(255,198,1)',
+          'rgb(255,198,1)',
+          'rgb(255,198,1)',
+          'rgb(255,198,1)',
+          'rgb(255,198,1)',
+        ],
+      },
+      {
+        label: 'Neutral',
+        data: {{star_neu}},
+        backgroundColor: [
+          'rgb(40,180,40)',
+          'rgb(40,180,40)',
+          'rgb(40,180,40)',
+         'rgb(40,180,40)',
+          'rgb(40,180,40)',
+        ],
+      },
+      {
+        label: 'Negative',
+        data: {{star_neg}},
+        backgroundColor: [
+          'rgba(239,40,95,0.94)',
+          'rgba(239,40,95,0.94)',
+          'rgba(239,40,95,0.94)',
+          'rgba(239,40,95,0.94)',
+          'rgba(239,40,95,0.94)',
+        ],
+      },
+    ]
+  };
+      const config2 = {
+    type: 'bar',
+    data: data2,
+    options: {
+      plugins: {
+        title: {
+          display: false,
+          text: 'Chart.js Bar Chart - Stacked'
+        },
+      },
+      responsive: true,
+      scales: {
+        x: {
+          stacked: true,
+          text: 'Rating'
+        },
+        y: {
+          stacked: true,
+          text: 'Review'
+        }
+      }
+    }
+  };
+      let mypieChart2 = document.getElementById('mypieChart2').getContext('2d');
+      new Chart(mypieChart2, config2);
+
+      const pos_freq_data ={{pos_freq_count|safe}};
+  const labels_freq = {{pos_freq_word|safe}};
+
+  const data_freq = {
+  labels: labels_freq,
+  datasets: [
+    {
+      label: 'Most Positive Keywords',
+      data: pos_freq_data,
+      backgroundColor: [
+        'rgb(75,245,84)',
+        'rgb(42,210,210)',
+        'rgb(190,98,88)',
+        'rgb(210,187,40)',
+        'rgb(211,32,181)',
+        'rgb(234,19,28)',
+        'rgb(255,106,0)',
+        'rgb(35,51,51)',
+        'rgb(149,232,180)',
+        'rgba(161,128,104,0.71)',
+      ],
+    },
+  ]
+};
+  const config_freq = {
+  type: 'bar',
+  data: data_freq,
+  options: {
+    plugins: {
+      title: {
+        display: false,
+        text: 'Chart.js Bar Chart - Stacked'
+      },
+    },
+    responsive: true,
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true
+      }
+    }
+  }
+};
+  let barchart2 = document.getElementById('barchart2').getContext('2d');
+  new Chart(barchart2, config_freq);
+
+  const neg_freq_data = {{neg_freq_count|safe}};
+  const labels_freq_neg = {{neg_freq_word|safe}};
+  const data_freq_neg = {
+  labels: labels_freq_neg,
+  datasets: [
+    {
+      label: 'Most Negative Keywords',
+      data: neg_freq_data,
+      backgroundColor: [
+              'rgb(234,19,28)',
+
+        'rgb(42,210,210)',
+        'rgb(190,98,88)',
+        'rgb(210,187,40)',
+        'rgb(211,32,181)',
+        'rgb(75,245,84)',
+        'rgb(255,106,0)',
+              'rgb(35,51,51)',
+        'rgb(149,232,180)',
+        'rgba(161,128,104,0.71)',
+      ],
+    },
+  ]
+};
+  const config_freq_neg = {
+  type: 'bar',
+  data: data_freq_neg,
+  options: {
+    plugins: {
+      title: {
+        display: false,
+        text: 'Chart.js Bar Chart - Stacked'
+      },
+    },
+    responsive: true,
+    scales: {
+      x: {
+        stacked: true,
+      },
+      y: {
+        stacked: true
+      }
+    }
+  }
+};
+  let barchart3 = document.getElementById('barchart3').getContext('2d');
+  new Chart(barchart3, config_freq_neg);
+  </script>
+
+
+</body>
+
+</html>
