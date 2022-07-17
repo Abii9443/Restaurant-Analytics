@@ -445,12 +445,12 @@ def home1():
 def dashboard():
     return redirect(url_for('home1'))
 
-@app.route('/download', methods=["GET", "POST"])
-def download():
-    response = make_response(open('dinebrand.xlsx', 'rb').read())
-    response.headers['Content-Type'] = 'text/xlsx'
-    response.headers["Content-Disposition"] = "attachment; filename=DineBrand.xlsx"
-    return response
+# @app.route('/download', methods=["GET", "POST"])
+# def download():
+#     response = make_response(open('dinebrand.xlsx', 'rb').read())
+#     response.headers['Content-Type'] = 'text/xlsx'
+#     response.headers["Content-Disposition"] = "attachment; filename=DineBrand.xlsx"
+#     return response
 
 @app.route('/state_based', methods=["GET", "POST"])
 def state_based():
